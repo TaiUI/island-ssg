@@ -1,4 +1,5 @@
 import { cac } from "cac";
+import {createDevServer} from "./dev";
 
 const version = require("../../package.json").version;
 
@@ -9,6 +10,9 @@ cli
   .alias("dev")
   .action(async (root: string) => {
     console.log("dev", root);
+    const server = await createDevServer(root);
+    await server.listen();
+    server.printUrls();
   });
 
 cli
